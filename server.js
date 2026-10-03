@@ -1,3 +1,4 @@
+
 import "dotenv/config";
 import express from "express";
 import helmet from "helmet";
@@ -7,9 +8,9 @@ import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
 import { v4 as uuid } from "uuid";
-import { connectDB, getDB } from "./src/db.js";
-import { validateTelegramInitData, signUser, verifyToken } from "./src/auth.js";
-import { createInvoice, getPayment, createPayout } from "./src/oxapay.js";
+import { connectDB, getDB } from "./db.js";
+import { validateTelegramInitData, signUser, verifyToken } from "./auth.js";
+import { createInvoice, getPayment, createPayout } from "./oxapay.js";
 
 const app = express();
 const PORT = Number(process.env.PORT || 10000);
@@ -446,7 +447,6 @@ app.get("/api/deposit/:trackId", requireUser, async (req, res) => {
     res.status(400).json({ error: e?.response?.data?.message || e.message });
   }
 });
-
 
 app.post("/api/withdraw", requireUser, async (req, res) => {
   try {
