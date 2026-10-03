@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Goex Admin</title><link rel="stylesheet" href="/styles.css"><style>body{padding:20px}.admin{max-width:1000px;margin:auto}.admin-nav{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}.admin-nav button{padding:10px 15px;border-radius:18px;background:var(--soft)}.admin-nav button.active{background:var(--green);color:#fff}.admin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.field{margin:8px 0}.field label{font-size:13px;color:var(--muted)}@media(max-width:650px){.admin-grid{grid-template-columns:1fr 1fr}}</style></head>
+<body>
+<div class="admin" id="adminApp">
+  <div class="row space"><div><h1>Goex Admin</h1><p class="muted">Control panel</p></div><button class="btn soft" id="logout">Logout</button></div>
+  <div class="admin-nav"><button data-tab="dashboard">Dashboard</button><button data-tab="settings">Settings</button><button data-tab="users">Users</button><button data-tab="tasks">Tasks</button></div>
+  <section id="adminContent"></section>
+</div>
+<div id="toast"></div><script src="/admin.js"></script>
+</body></html>
