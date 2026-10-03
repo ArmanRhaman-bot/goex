@@ -1,4 +1,3 @@
-
 import "dotenv/config";
 import express from "express";
 import helmet from "helmet";
@@ -6,6 +5,8 @@ import rateLimit from "express-rate-limit";
 import cookieParser from "cookie-parser";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
+import path from "path";
+import { fileURLToPath } from "url";
 import jwt from "jsonwebtoken";
 import { v4 as uuid } from "uuid";
 import { connectDB, getDB } from "./db.js";
@@ -13,6 +14,8 @@ import { validateTelegramInitData, signUser, verifyToken } from "./auth.js";
 import { createInvoice, getPayment, createPayout } from "./oxapay.js";
 
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const PORT = Number(process.env.PORT || 10000);
 
 app.set("trust proxy", 1);
@@ -639,8 +642,8 @@ app.delete("/api/admin/tasks/:id", requireAdmin, async (req,res)=>{
 });
 
 app.get("/health", (req,res)=>res.json({ok:true,service:"goex-miniapp"}));
-app.use(express.static(".", { extensions:["html"] }));
-app.get("/admin", (req,res)=>res.sendFile(process.cwd()+"/admin.html"));
-app.get(/.*/, (req,res)=>res.sendFile(process.cwd()+"/index.html"));
+app.use(express.static(__dirname, { extensions: ["html"] }));
+app.get("/admin", (req,res)=>res.sendFile(path.join(__dirname,"admin.html")));
+app.get(/.*/, (req,res)=>res.sendFile(path.join(__dirname,"index.html")));
 
 app.listen(PORT, ()=>console.log(`Goex Mini App running on :${PORT}`));
